@@ -427,9 +427,36 @@ body{
   80%{transform:translate(calc(var(--dx)*2),calc(var(--dy)*2)) scale(0.8);opacity:0.3}
   100%{transform:translate(calc(var(--dx)*3),calc(var(--dy)*3)) scale(0);opacity:0}
 }
+
+/* ===== 16:9 CONTAINER ===== */
+.game-container{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(100vw,177.78vh);height:min(56.25vw,100vh);
+  overflow:hidden;
+  border-radius:0;
+}
+@media(min-aspect-ratio:16/9){
+  .game-container{width:177.78vh;height:100vh;}
+}
+@media(max-aspect-ratio:16/9){
+  .game-container{width:100vw;height:56.25vw;}
+}
+.game-container > .scene{
+  position:absolute;inset:0;
+}
+.game-container > .header{
+  position:absolute;top:0;left:0;right:0;height:48px;
+}
+.game-container > .compact-bar{
+  position:absolute;top:48px;left:0;right:0;height:48px;
+}
+.game-container > .toast{
+  position:absolute;top:6px;
+}
 </style>
 </head>
 <body>
+<div class="game-container">
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
@@ -756,5 +783,6 @@ document.getElementById('btnCompact').textContent = '📋 隐藏栏';
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
 </script>
+</div>
 </body>
 </html>
